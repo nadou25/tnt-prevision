@@ -1,0 +1,92 @@
+name: Daily Stock Scan
+
+on:
+  schedule:
+    # 14:00 UTC = 15:00 Paris (après ouverture US)
+    - cron: '0 14 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      market:
+        description: 'Marché à scanner'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - us
+          - europe
+          - crypto
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Stock Screener
+        run: |
+          python -c "
+import sys
+sys.path.insert(0, '.')
+print('🚀 Starting TNT Stock Screener...')
+print('📊 Loading modules...')
+
+try:
+    # Import et test basique
+    import pandas as pd
+    import numpy as np
+    import yfinance as yf
+    
+    # Test rapide avec quelques tickers
+    tickers = ['AAPL', 'MSFT', 'GOOGL', 'NVDA', 'TSLA']
+    print(f'📈 Scanning {len(tickers)} stocks...')
+    
+    results = []
+    for ticker in tickers:
+        try:
+            stock = yf.Ticker(ticker)
+            hist = stock.history(period='5d')
+            if not hist.empty:
+                last_close = hist['Close'].iloc[-1]
+                change = ((hist['Close'].iloc[-1] / hist['Close'].iloc[0]) - 1) * 100
+                results.append({
+                    'Ticker': ticker,
+                    'Price': round(last_close, 2),
+                    'Change_5d': round(change, 2)
+                })
+                print(f'  ✅ {ticker}: \${last_close:.2f} ({change:+.2f}%)')
+        except Exception as e:
+            print(f'  ⚠️ {ticker}: Error - {e}')
+    
+    # Sauvegarder résultats
+    if results:
+        df = pd.DataFrame(results)
+        df.to_csv('scan_results.csv', index=False)
+        print(f'\\n✅ Scan complete! {len(results)} stocks analyzed')
+        print(df.to_string(index=False))
+    
+except Exception as e:
+    print(f'❌ Error: {e}')
+    sys.exit(1)
+"
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-results-${{ github.run_id }}
+          path: scan_results.csv
+          retention-days: 7
+          if-no-files-found: ignore
