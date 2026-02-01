@@ -1,45 +1,71 @@
+<div align="center">
+
 # 📈 TNT Prevision - Stock Screener Pro v11
 
-> Screener d'actions multi-marchés avec 20+ indicateurs techniques avancés et Machine Learning.
-
+[![CI](https://github.com/nadou25/tnt-prevision/actions/workflows/ci.yml/badge.svg)](https://github.com/nadou25/tnt-prevision/actions/workflows/ci.yml)
+[![Daily Scan](https://github.com/nadou25/tnt-prevision/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/nadou25/tnt-prevision/actions/workflows/daily-scan.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 Vue d'ensemble
+**🚀 Screener d'actions multi-marchés avec 20+ indicateurs techniques avancés et Machine Learning**
 
-**TNT Prevision** est un screener d'actions professionnel qui combine analyse technique avancée et Machine Learning pour détecter les meilleures opportunités court et moyen terme.
+[Fonctionnalités](#-fonctionnalités) •
+[Installation](#-installation) •
+[Utilisation](#-utilisation) •
+[Indicateurs](#-indicateurs-techniques) •
+[ML](#-machine-learning)
+
+<img src="https://img.shields.io/badge/Trading-Automatisé-green?style=for-the-badge" />
+<img src="https://img.shields.io/badge/ML-Prédiction-blue?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Multi--Marchés-Global-orange?style=for-the-badge" />
+
+</div>
+
+---
+
+## 🎯 Fonctionnalités
 
 ### ⚡ Indicateurs Court Terme
-- **ADX + DI+/DI-** - Force de tendance
-- **Stochastic RSI** - Timing optimal
-- **Williams %R** - Zones extrêmes
-- **CMF** - Chaikin Money Flow (pression achat/vente)
-- **OBV** - On Balance Volume (accumulation/distribution)
-- **VWAP** - Volume Weighted Average Price
-- **SuperTrend** - Direction de tendance
-- **Squeeze Momentum** - Volatilité + Momentum
+| Indicateur | Description | Signal |
+|------------|-------------|--------|
+| **ADX + DI+/DI-** | Force de tendance | Trend strength |
+| **Stochastic RSI** | Timing optimal | Overbought/Oversold |
+| **Williams %R** | Zones extrêmes | Reversal zones |
+| **CMF** | Chaikin Money Flow | Buy/Sell pressure |
+| **OBV** | On Balance Volume | Accumulation/Distribution |
+| **VWAP** | Volume Weighted Price | Fair value |
+| **SuperTrend** | Direction tendance | Trend direction |
+| **Squeeze Momentum** | Volatilité + Momentum | Breakout detection |
 
 ### 🎯 Détection d'Opportunités
-- Scanner Breakout (cassure résistance/support)
-- Détection Gap (Gap Up/Down significatifs)
-- Volume Spike Alert (volume > 200% moyenne)
-- Pattern Reversal (Hammer, Engulfing, Doji)
-- Momentum Burst (accélération soudaine)
+- 📊 **Scanner Breakout** - Cassure résistance/support
+- 📈 **Détection Gap** - Gap Up/Down significatifs
+- 🔥 **Volume Spike Alert** - Volume > 200% moyenne
+- 🔄 **Pattern Reversal** - Hammer, Engulfing, Doji
+- ⚡ **Momentum Burst** - Accélération soudaine
 
 ### 📊 Scoring Multi-Horizon
-| Horizon | Durée | Usage |
-|---------|-------|-------|
-| Intraday | 1-3 jours | Day trading |
-| Swing | 5-15 jours | Swing trading |
-| Position | 15-60 jours | Position trading |
+
+| Horizon | Durée | Usage | Score |
+|---------|-------|-------|-------|
+| 🔴 **Intraday** | 1-3 jours | Day trading | 0-100 |
+| 🟡 **Swing** | 5-15 jours | Swing trading | 0-100 |
+| 🟢 **Position** | 15-60 jours | Position trading | 0-100 |
 
 ### 🌍 Marchés Couverts
-- 🇺🇸 USA (NYSE, NASDAQ)
-- 🇪🇺 Europe (Euronext, XETRA)
-- 🇫🇷 France (CAC40, SBF120)
-- 🎮 Gaming (EA, Activision, Ubisoft...)
-- ⛏️ Commodities (Or, Pétrole, Gaz...)
-- 🪙 Crypto (Top 100)
+
+<div align="center">
+
+| Marché | Couverture | Symboles |
+|--------|------------|----------|
+| 🇺🇸 **USA** | NYSE, NASDAQ | 500+ |
+| 🇪🇺 **Europe** | Euronext, XETRA | 200+ |
+| 🇫🇷 **France** | CAC40, SBF120 | 120+ |
+| 🎮 **Gaming** | EA, ATVI, UBSFF | 20+ |
+| ⛏️ **Commodities** | Or, Pétrole, Gaz | 30+ |
+| 🪙 **Crypto** | BTC, ETH, Top 100 | 100+ |
+
+</div>
 
 ---
 
@@ -53,7 +79,7 @@
 
 ```bash
 # Cloner le repo
-git clone https://github.com/YOUR_USERNAME/tnt-prevision.git
+git clone https://github.com/nadou25/tnt-prevision.git
 cd tnt-prevision
 
 # Créer environnement virtuel
@@ -69,11 +95,72 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+---
+
+## 💻 Utilisation
+
 ### Lancement
 
 ```bash
 python stock_screener_pro_v9.py
 ```
+
+### Options de scan
+
+```bash
+# Scan marché US
+python stock_screener_pro_v9.py --market us
+
+# Scan crypto
+python stock_screener_pro_v9.py --market crypto
+
+# Export Excel
+python stock_screener_pro_v9.py --export excel
+```
+
+---
+
+## 📊 Indicateurs Techniques
+
+### RSI (Relative Strength Index)
+```
+RSI < 30  → Survente (BUY signal)
+RSI > 70  → Surachat (SELL signal)
+```
+
+### MACD
+```
+MACD > Signal → Bullish
+MACD < Signal → Bearish
+Histogram ↑   → Momentum croissant
+```
+
+### Bollinger Bands
+```
+Prix < Lower Band → Survente potentielle
+Prix > Upper Band → Surachat potentiel
+Squeeze          → Breakout imminent
+```
+
+---
+
+## 🧠 Machine Learning
+
+### Modèles utilisés
+
+| Modèle | Usage | Accuracy |
+|--------|-------|----------|
+| **RandomForest** | Classification tendance | ~68% |
+| **GradientBoosting** | Scoring opportunités | ~72% |
+| **IsolationForest** | Détection anomalies | N/A |
+| **AdaBoost** | Ensemble voting | ~70% |
+
+### Features ML
+- Prix OHLCV (5, 10, 20, 50 périodes)
+- Indicateurs techniques (RSI, MACD, BB, etc.)
+- Volume patterns
+- Volatilité historique
+- Momentum multi-timeframe
 
 ---
 
@@ -81,53 +168,17 @@ python stock_screener_pro_v9.py
 
 ```
 tnt-prevision/
-├── stock_screener_pro_v9.py    # Application principale
-├── requirements.txt            # Dépendances Python
-├── README.md                   # Documentation
-├── LICENSE                     # Licence MIT
-└── .gitignore                  # Fichiers ignorés
+├── stock_screener_pro_v9.py    # 🎯 Application principale
+├── requirements.txt            # 📦 Dépendances
+├── README.md                   # 📖 Documentation
+├── LICENSE                     # 📄 MIT License
+├── CHANGELOG.md               # 📝 Historique
+├── .github/
+│   └── workflows/
+│       ├── ci.yml             # ✅ Tests CI
+│       └── daily-scan.yml     # 🔄 Scan automatique
+└── .gitignore
 ```
-
----
-
-## 🔧 Configuration
-
-### Variables d'environnement (optionnel)
-
-```bash
-# Fichier .env
-LOG_LEVEL=INFO
-CACHE_TTL=3600
-```
-
----
-
-## 📊 Utilisation
-
-### Mode interactif
-
-```bash
-python stock_screener_pro_v9.py
-```
-
-### Options disponibles
-- Scanner les marchés US
-- Scanner les marchés européens
-- Scanner les cryptos
-- Exporter en Excel/CSV
-
----
-
-## 🧠 Machine Learning
-
-Le screener utilise plusieurs modèles ML pour améliorer les prédictions :
-
-| Modèle | Usage |
-|--------|-------|
-| RandomForest | Classification tendance |
-| GradientBoosting | Scoring opportunités |
-| IsolationForest | Détection anomalies |
-| AdaBoost | Ensemble voting |
 
 ---
 
@@ -135,10 +186,10 @@ Le screener utilise plusieurs modèles ML pour améliorer les prédictions :
 
 > **Ce logiciel est fourni à titre éducatif et informatif uniquement.**
 > 
-> Les signaux générés ne constituent PAS des conseils financiers professionnels.
+> Les signaux générés ne constituent PAS des conseils financiers.
 > Le trading comporte des risques significatifs de perte en capital.
 > 
-> **Faites toujours vos propres recherches (DYOR) avant d'investir.**
+> **DYOR - Do Your Own Research**
 
 ---
 
@@ -148,10 +199,10 @@ MIT License - voir [LICENSE](LICENSE)
 
 ---
 
-## 🤝 Contribution
+<div align="center">
 
-Les contributions sont les bienvenues ! Voir [CONTRIBUTING.md](CONTRIBUTING.md)
+**Créé avec ❤️ par [Nadir](https://github.com/nadou25)**
 
----
+[![GitHub](https://img.shields.io/badge/GitHub-nadou25-181717?style=for-the-badge&logo=github)](https://github.com/nadou25)
 
-Créé avec ❤️ par **Nadir**
+</div>
